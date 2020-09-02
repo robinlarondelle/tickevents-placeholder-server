@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 app.use(morgan("dev"))
 app.use(cors())
 
-app.use("/sendMail", (req, res, next) => {
+app.use("/sendDetails", (req, res, next) => {
     const { email, firstname, lastname } = req.body
 
     if (email && firstname && lastname) {
