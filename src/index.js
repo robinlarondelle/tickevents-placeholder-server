@@ -4,6 +4,8 @@ else require('dotenv').config({ path: "./env/environment.prod.env" })
 const express = require("express")
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
+const cors = require("cors")
+
 const ErrorMessage = require("./models/error.model")
 const port = process.env.PORT || "3000"
 const apiKey = process.env.mailchimp_api_key
@@ -14,6 +16,7 @@ const mailchimp = new Mailchimp(apiKey);
 
 app.use(bodyParser.json())
 app.use(morgan("dev"))
+app.use(cors())
 
 app.use("/sendMail", (req, res, next) => {
     const { email, firstname, lastname } = req.body
