@@ -1,0 +1,28 @@
+{
+  "name": "tickevents-placeholder-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "SET NODE_ENV=development& nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinlarondelle/tickevents-placeholder-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robinlarondelle/tickevents-placeholder-server/issues"
+  },
+  "homepage": "https://github.com/robinlarondelle/tickevents-placeholder-server#readme",
+  "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.14",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mailchimp-api-v3": "^1.14.0",
+    "morgan": "^1.10.0"
+  }
+}
