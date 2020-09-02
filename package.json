@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=development& nodemon src/index.js"
+    "start": "SET NODE_ENV=development& nodemon src/index.js",
+    "publish": "node src/index.js"
   },
   "repository": {
     "type": "git",
