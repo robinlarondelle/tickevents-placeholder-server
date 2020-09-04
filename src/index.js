@@ -31,7 +31,7 @@ app.use("/sendDetails", (req, res, next) => {
             }
         })
             .then(result => res.status(200).json(result).end())
-            .catch(err => next(new ErrorMessage("MailchimpError", err, 400)))
+            .catch(err => next(new ErrorMessage("MailchimpError", err.title, 400)))
 
     } else next(new ErrorMessage("MissingBodyError", "Please provide a valid email", 400))
 })
