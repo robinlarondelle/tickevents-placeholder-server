@@ -1,5 +1,4 @@
 if (process.env.NODE_ENV == "development") require('dotenv').config({ path: "./env/environment.env" })
-else require('dotenv').config({ path: "./env/environment.prod.env" })
 
 const express = require("express")
 const morgan = require("morgan")
