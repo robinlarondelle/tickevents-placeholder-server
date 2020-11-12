@@ -18,16 +18,12 @@ app.use(morgan("dev"))
 app.use(cors())
 
 app.use("/sendDetails", (req, res, next) => {
-    const { email, firstname, lastname } = req.body
+    const { email } = req.body
 
-    if (email && firstname && lastname) {
+    if (email) {
         mailchimp.post(`/lists/${listID}/members`, {
             email_address: email,
-            status: "subscribed",
-            merge_fields: {
-                FNAME: firstname,
-                LNAME: lastname
-            }
+            status: "subscribed"
         })
             .then(result => res.status(200).json(result).end())
             .catch(err => next(new ErrorMessage("MailchimpError", err.title, 400)))
