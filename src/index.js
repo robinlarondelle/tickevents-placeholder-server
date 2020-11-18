@@ -4,6 +4,7 @@ const express = require("express")
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
 const cors = require("cors")
+const emailValidator = require("email-validator");
 
 const ErrorMessage = require("./models/error.model")
 const port = process.env.PORT || "3000"
@@ -18,17 +19,24 @@ app.use(morgan("dev"))
 app.use(cors())
 
 app.use("/sendDetails", (req, res, next) => {
-    const { email } = req.body
+    const { email, firstname, lastname } = req.body
 
     if (email) {
+        if (emailValidator.validate(email)) {
+
+
         mailchimp.post(`/lists/${listID}/members`, {
             email_address: email,
-            status: "subscribed"
+            status: "subscribed",
+            merge_fields: {
+                FNAME: firstname,
+                LNAME: lastname
+            }
         })
             .then(result => res.status(200).json(result).end())
-            .catch(err => next(new ErrorMessage("MailchimpError", err.title, 400)))
-
-    } else next(new ErrorMessage("MissingBodyError", "Please provide a valid email", 400))
+            .catch(err => next(new ErrorMessage("mailchimpError", err.title, 400)))
+        } else next(new ErrorMessage("invalidBody", "please provide a valid email", 400))
+    } else next(new ErrorMessage("emailMissingInBody", "please supply a email address", 400))
 })
 
 app.use("*", function (req, res, next) { next(new ErrorMessage("EndpointNotFoundError", "Endpoint not found", 404)) })
